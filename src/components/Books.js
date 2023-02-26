@@ -1,4 +1,4 @@
-
+import { useNavigate } from "react-router-dom";
 import {
   useGetBooksQuery,
   useDeleteBookMutation,
@@ -7,7 +7,9 @@ import {
 export default function Books() {
   const {data,isError,isLoading} = useGetBooksQuery();
   const [deleteBook,response] = useDeleteBookMutation();
-  console.log(response)
+
+  const navigate = useNavigate();
+
   const callDel = async e => await deleteBook(e.target.value)
   if(isError)
     return ( <h1>Error</h1> )
@@ -21,12 +23,18 @@ export default function Books() {
           <span className="ml-2">{item.name}</span>
           <span className="ml-2">{item.author}</span>
           <button
-            className="ml-2"
+            className="ml-2 bg-black text-white"
             onClick={callDel}
             disabled={response.isLoading ? true : false}
             value={item.id}
           >
             Delete
+          </button>
+          <button
+            className="ml-2 bg-black text-white"
+            onClick={() => navigate(`/updateBook/${item.id}`)}
+          >
+            Update
           </button>
         </li>
       ))}

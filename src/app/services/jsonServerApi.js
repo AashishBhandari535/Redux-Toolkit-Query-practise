@@ -23,13 +23,21 @@ export const jsonServerApi = createApi({
       }),
       invalidatesTags: ["books"],
     }),
-    deleteBook:builder.mutation({
+    deleteBook: builder.mutation({
       query: (id) => ({
-        url:`books/${id}`,
-        method:'DELETE'
+        url: `books/${id}`,
+        method: "DELETE",
       }),
-      invalidatesTags: ["books"]
-    })
+      invalidatesTags: ["books"],
+    }),
+    updateBook: builder.mutation({
+      query: ({ id, name, author }) => ({
+        url: `books/${id}`,
+        method: "PUT",
+        body: { name, author },
+      }),
+      invalidatesTags: ["books"],
+    }),
   }),
 });
-export const { useGetBooksQuery, useCreateBookMutation,useDeleteBookMutation } = jsonServerApi;
+export const { useGetBooksQuery, useCreateBookMutation,useDeleteBookMutation,useUpdateBookMutation } = jsonServerApi;
