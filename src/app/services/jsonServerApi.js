@@ -13,7 +13,7 @@ export const jsonServerApi = createApi({
         url: "books",
         method: "GET",
       }),
-      providesTgas: ["books"],
+      providesTags: ["books"],
     }),
     createBook: builder.mutation({
       query: ({ name, author }) => ({
@@ -23,6 +23,13 @@ export const jsonServerApi = createApi({
       }),
       invalidatesTags: ["books"],
     }),
+    deleteBook:builder.mutation({
+      query: (id) => ({
+        url:`books/${id}`,
+        method:'DELETE'
+      }),
+      invalidatesTags: ["books"]
+    })
   }),
 });
-export const { useGetBooksQuery, useCreateBookMutation } = jsonServerApi;
+export const { useGetBooksQuery, useCreateBookMutation,useDeleteBookMutation } = jsonServerApi;

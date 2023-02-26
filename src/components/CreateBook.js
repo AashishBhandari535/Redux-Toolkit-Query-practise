@@ -13,7 +13,12 @@ export default function CreateBook() {
   const callbn = async (e) => {
     try{
          e.preventDefault();
-         await addNewBook(info);
+         const data={...info};
+         setInfo({
+           name: "",
+           author: "",
+         });
+         await addNewBook(data);
          navigate('/');
     }catch(err) {
       alert(err)
